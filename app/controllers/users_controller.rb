@@ -12,6 +12,7 @@ class UsersController < ApplicationController
       listings: @user.listings
     }
     render json: user
+    # render json: @user, include: :listings
   end
 
   def create
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update!(user_params)
+    @user.update!(update_user_params)
     render json: @user
   end
 
@@ -34,6 +35,10 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :phone, :agency, :avatar)
+  end
+  
+  def update_user_params
+    params.require(:profile).permit(:first_name, :last_name, :email, :phone, :agency, :avatar)
   end
 
 end
