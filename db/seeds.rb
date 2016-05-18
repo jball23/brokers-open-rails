@@ -9,6 +9,8 @@
 User.destroy_all
 Listing.destroy_all
 
+# Next time, I'd recommend creating this from a JSON file. It's easier to read!
+
 jordan = User.create(first_name: "Jordan", last_name: "Ballard", email: "jordan@gmail.com", phone: "555-555-5555", agency: "Keller Williams", avatar: "https://pmcdeadline2.files.wordpress.com/2016/02/leonardo-dicaprio-the-revenant-1.jpg?w=446&h=299&crop=1")
 mike = User.create(first_name: "Mike", last_name: "Nahum", email: "mike@gmail.com", phone: "888-888-8888", agency: "Century 21", avatar: "http://cdn.wegotthiscovered.com/wp-content/uploads/Tom-Hardy.jpg")
 lauren = User.create(first_name: "Lauren", last_name: "Kennedy", email: "lauren@gmail.com", phone: "999-999-9999", agency: "Remax", avatar: "http://huo360.com/uploads/2015/06/1433949126754811.jpg")
@@ -23,6 +25,8 @@ Listing.create(date: "6/12/2016", time_start: "11:00AM", time_end: "1:00PM", add
               food_offered: true, food_description: "Panera Bread lunch",
               incentive: "$100 Amazon gift card", property_image: "https://s-media-cache-ak0.pinimg.com/736x/77/69/a9/7769a9d08ee1748a3b0120eeff5e258c.jpg",
               user_id: jordan.id)
+              # No need for `user_id: jordan.id`. `user: jordan` is fine. ActiveRecord automatically figures out the ID.
+              # Alternatively you can also write `jordan.listings.create(...)`. I'd say this is better practice because it's more semantic. But they all do the same thing.
 Listing.create(date: "5/12/2016", time_start: "12:00PM", time_end: "2:00PM", address: "456 State Ave.",
               city: "Vienna", state: "Virginia", zipcode: "22102", county: "Fairfax",
               list_price: 1000000, property_status: "Coming Soon", property_type: "Condominium",
